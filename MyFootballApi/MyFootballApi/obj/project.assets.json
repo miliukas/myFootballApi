@@ -12885,11 +12885,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ernestukas\\Desktop\\Saitynas\\MyFootballApi\\MyFootballApi\\MyFootballApi.csproj",
+      "projectUniqueName": "C:\\Users\\Ernestukas\\Documents\\GitHub\\myFootballApi\\MyFootballApi\\MyFootballApi\\MyFootballApi.csproj",
       "projectName": "MyFootballApi",
-      "projectPath": "C:\\Users\\Ernestukas\\Desktop\\Saitynas\\MyFootballApi\\MyFootballApi\\MyFootballApi.csproj",
+      "projectPath": "C:\\Users\\Ernestukas\\Documents\\GitHub\\myFootballApi\\MyFootballApi\\MyFootballApi\\MyFootballApi.csproj",
       "packagesPath": "C:\\Users\\Ernestukas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ernestukas\\Desktop\\Saitynas\\MyFootballApi\\MyFootballApi\\obj\\",
+      "outputPath": "C:\\Users\\Ernestukas\\Documents\\GitHub\\myFootballApi\\MyFootballApi\\MyFootballApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
