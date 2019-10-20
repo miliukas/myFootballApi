@@ -1,0 +1,15 @@
+C:\Users\Ernestukas\Desktop\Saitynas\MyFootballApi\MyFootballApi\bin\Debug\netcoreapp2.1\MyFootballApi.deps.json
+C:\Users\Ernestukas\Desktop\Saitynas\MyFootballApi\MyFootballApi\bin\Debug\netcoreapp2.1\MyFootballApi.runtimeconfig.json
+C:\Users\Ernestukas\Desktop\Saitynas\MyFootballApi\MyFootballApi\bin\Debug\netcoreapp2.1\MyFootballApi.runtimeconfig.dev.json
+C:\Users\Ernestukas\Desktop\Saitynas\MyFootballApi\MyFootballApi\bin\Debug\netcoreapp2.1\MyFootballApi.dll
+C:\Users\Ernestukas\Desktop\Saitynas\MyFootballApi\MyFootballApi\bin\Debug\netcoreapp2.1\MyFootballApi.pdb
+C:\Users\Ernestukas\Desktop\Saitynas\MyFootballApi\MyFootballApi\obj\Debug\netcoreapp2.1\MyFootballApi.csproj.CoreCompileInputs.cache
+C:\Users\Ernestukas\Desktop\Saitynas\MyFootballApi\MyFootballApi\obj\Debug\netcoreapp2.1\MyFootballApi.RazorAssemblyInfo.cache
+C:\Users\Ernestukas\Desktop\Saitynas\MyFootballApi\MyFootballApi\obj\Debug\netcoreapp2.1\MyFootballApi.RazorAssemblyInfo.cs
+C:\Users\Ernestukas\Desktop\Saitynas\MyFootballApi\MyFootballApi\obj\Debug\netcoreapp2.1\MyFootballApi.AssemblyInfoInputs.cache
+C:\Users\Ernestukas\Desktop\Saitynas\MyFootballApi\MyFootballApi\obj\Debug\netcoreapp2.1\MyFootballApi.AssemblyInfo.cs
+C:\Users\Ernestukas\Desktop\Saitynas\MyFootballApi\MyFootballApi\obj\Debug\netcoreapp2.1\MyFootballApi.RazorTargetAssemblyInfo.cache
+C:\Users\Ernestukas\Desktop\Saitynas\MyFootballApi\MyFootballApi\obj\Debug\netcoreapp2.1\MyFootballApi.dll
+C:\Users\Ernestukas\Desktop\Saitynas\MyFootballApi\MyFootballApi\obj\Debug\netcoreapp2.1\MyFootballApi.pdb
+C:\Users\Ernestukas\Desktop\Saitynas\MyFootballApi\MyFootballApi\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
+C:\Users\Ernestukas\Desktop\Saitynas\MyFootballApi\MyFootballApi\obj\Debug\netcoreapp2.1\MyFootballApi.csprojAssemblyReference.cache
