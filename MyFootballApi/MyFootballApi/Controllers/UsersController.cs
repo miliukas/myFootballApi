@@ -23,7 +23,7 @@ namespace MyFootballApi.Controllers
 
         // GET: api/Users
         [Route("~/api/Users")]
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "administrator")]
         [HttpGet]
         public IEnumerable<User> GetUsers()
         {
@@ -32,7 +32,7 @@ namespace MyFootballApi.Controllers
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "administrator")]
         public async Task<IActionResult> GetUser([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -52,7 +52,7 @@ namespace MyFootballApi.Controllers
 
         // PUT: api/User/5
         [HttpPut("{id}")]
-        [Authorize(Roles = "Administrator, User")]
+        [Authorize(Roles = "administrator, User")]
         public async Task<IActionResult> PutUser([FromRoute] int id, [FromBody] User user)
         {
             if (!ModelState.IsValid)
@@ -74,7 +74,7 @@ namespace MyFootballApi.Controllers
 
         // POST: api/Users
         [HttpPost]
-        [Authorize(Roles = "Administrator, User")]
+        [AllowAnonymous]
         public async Task<IActionResult> PostUser([FromBody] User user)
         {
             if (!ModelState.IsValid)
@@ -90,7 +90,7 @@ namespace MyFootballApi.Controllers
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "administrator")]
         public async Task<IActionResult> DeleteUser([FromRoute] int id)
         {
             if (!ModelState.IsValid)

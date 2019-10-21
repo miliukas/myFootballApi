@@ -51,7 +51,7 @@ namespace MyFootballApi.Models
                             password = password,
                             role = role,
                             email = email,
-                            favouriteTeam = favouriteTeam                  
+                            favouriteTeam = favouriteTeam
                         });
                     }
                     reader.Close();
@@ -114,8 +114,9 @@ namespace MyFootballApi.Models
         {
             _context = new MyFootballContext();
             StringBuilder query = new StringBuilder();
+            string encPass = EncDecService.Encrypt(user.password);
             query.AppendFormat("insert into webuser (username, password, role, email, favouriteTeam)"
-                               + " values ('{0}','{1}','{2}','{3}',{4})", user.username, user.password, user.role, user.email, user.favouriteTeam);
+                               + " values ('{0}','{1}','{2}','{3}',{4})", user.username, encPass, user.role, user.email, user.favouriteTeam);
 
             using (SqlConnection conn = _context.GetConnection())
             {
@@ -124,6 +125,7 @@ namespace MyFootballApi.Models
                 SqlCommand cmd = new SqlCommand(q, conn);
                 cmd.ExecuteNonQuery();
                 conn.Close();
+                user.password = encPass;
                 return user;
             }
         }
@@ -154,7 +156,7 @@ namespace MyFootballApi.Models
             _context = new MyFootballContext();
             StringBuilder query = new StringBuilder();
             query.AppendFormat("Update webuser Set username = '{0}', password = '{1}', role = '{2}', email = '{3}', favouriteTeam = '{4}'"
-                               +" where id = {5}",
+                               + " where id = {5}",
                               user.username, user.password, user.role, user.email, user.favouriteTeam, id);
             using (SqlConnection conn = _context.GetConnection())
             {
@@ -166,6 +168,5 @@ namespace MyFootballApi.Models
                 return user;
             }
         }
-
     }
 }

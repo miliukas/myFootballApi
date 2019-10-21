@@ -22,13 +22,13 @@ namespace MyFootballApi.Models
 
         public bool IsAuthenticated(TokenRequest request, out string token)
         {
-
+            string role;
             token = string.Empty;
-            if (!_userManagementService.IsValidUser(request.Username, request.Password)) return false;
+            if (!_userManagementService.IsValidUser(request.Username, request.Password, out role)) return false;
             //Kuriant rakta reikes pridet role is duobazes
             var claims = new List<Claim>();
             claims.Add(new Claim(ClaimTypes.Name, request.Username));
-            claims.Add(new Claim(ClaimTypes.Role, "Administrator"));
+            claims.Add(new Claim(ClaimTypes.Role, role));
             //simetrinis security raktas
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenManagement.Secret));
             //įgaliojimai, raktas ir koduote naudojama.

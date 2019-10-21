@@ -53,7 +53,7 @@ namespace MyFootballApi.Controllers
 
         // PUT: api/Games/5
         [HttpPut("{id}")]
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "administrator")]
         public async Task<IActionResult> PutGame([FromRoute] int id, [FromBody] Game game)
         {
 
@@ -76,7 +76,7 @@ namespace MyFootballApi.Controllers
 
         // POST: api/Games
         [HttpPost]
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "administrator")]
         public async Task<IActionResult> PostGame([FromBody] Game game)
         {
             if (!ModelState.IsValid)
@@ -92,7 +92,7 @@ namespace MyFootballApi.Controllers
 
         // DELETE: api/Games/5
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "administrator")]
         public async Task<IActionResult> DeleteGame([FromRoute] int id)
         {
             if (!ModelState.IsValid)

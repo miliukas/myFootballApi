@@ -24,7 +24,6 @@ namespace MyFootballApi.Controllers
         [HttpPost]
         public IActionResult RequestToken([FromBody] TokenRequest request)
         {
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -36,7 +35,7 @@ namespace MyFootballApi.Controllers
                 return Ok(token);
             }
 
-            return BadRequest("Invalid Request");
+            return BadRequest("There is no such a user. Please check Password or Username");
         }
     }
 }
