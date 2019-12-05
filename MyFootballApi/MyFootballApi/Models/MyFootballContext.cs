@@ -17,16 +17,16 @@ namespace MyFootballApi.Models
         public User user;
         public MyFootballContext()
         {
-            this.ConnectionString = "Server=tcp:visadabus.database.windows.net, 1433; Initial Catalog=myFootball; Persist Security Info = false; User ID = ernestas; Password = Miliukas.; MultipleActiveResultSets=False; Encrypt=True; TrustServerCertificate=False; Connection Timeout=30;";
+            this.ConnectionString = "server=localhost;port=3306;database=myfootball;user=root;password=";
             player = new Player();
             team = new Team();
             game = new Game();
             user = new User();
         }
 
-        public SqlConnection GetConnection()
+        public MySqlConnection GetConnection()
         {
-            return new SqlConnection(ConnectionString);
+            return new MySqlConnection(ConnectionString);
         }
 
 

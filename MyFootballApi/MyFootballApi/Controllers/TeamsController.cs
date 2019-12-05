@@ -83,8 +83,7 @@ namespace MyFootballApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            //await
-            _context.team.Add(team);
+            await _context.team.Add(team);
 
             return CreatedAtAction("GetTeam", new { id = team.id }, team);
         }
@@ -102,9 +101,9 @@ namespace MyFootballApi.Controllers
             var team = await _context.team.FindAsync(id);
             if (team == null)
             {
-                return NotFound();
+                //return NotFound();
             }
-
+            string teamName = team.name;
             _context.team.Remove(team);
 
             return Ok(team);

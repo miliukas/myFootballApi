@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Text;
 
 namespace MyFootballApi.Models
@@ -25,10 +25,10 @@ namespace MyFootballApi.Models
         {
             List<User> list = new List<User>();
             _context = new MyFootballContext();
-            using (SqlConnection conn = _context.GetConnection())
+            using (MySqlConnection conn = _context.GetConnection())
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("select * from webuser", conn);
+                MySqlCommand cmd = new MySqlCommand("select * from webuser", conn);
 
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -69,11 +69,11 @@ namespace MyFootballApi.Models
         {
             User userById;
             _context = new MyFootballContext();
-            using (SqlConnection conn = _context.GetConnection())
+            using (MySqlConnection conn = _context.GetConnection())
             {
                 conn.Open();
                 string query = "select * from webuser where id = " + id.ToString();
-                SqlCommand cmd = new SqlCommand(query, conn);
+                MySqlCommand cmd = new MySqlCommand(query, conn);
                 using (var reader = cmd.ExecuteReader())
                 {
                     reader.Read();
@@ -116,19 +116,21 @@ namespace MyFootballApi.Models
             StringBuilder query = new StringBuilder();
             string encPass = EncDecService.Encrypt(user.password);
             query.AppendFormat("insert into webuser (username, password, role, email, favouriteTeam)"
-                               + " values ('{0}','{1}','{2}','{3}',{4})", user.username, encPass, user.role, user.email, user.favouriteTeam);
+                               + " values ('{0}','{1}','{2}','{3}','{4}')", user.username, encPass, "User", user.email, user.favouriteTeam);
 
-            using (SqlConnection conn = _context.GetConnection())
+            using (MySqlConnection conn = _context.GetConnection())
             {
                 conn.Open();
                 string q = query.ToString();
-                SqlCommand cmd = new SqlCommand(q, conn);
+                MySqlCommand cmd = new MySqlCommand(q, conn);
                 cmd.ExecuteNonQuery();
-                conn.Close();
                 user.password = encPass;
-                return user;
+                conn.Close();
             }
+            
+            return user;
         }
+
         /// <summary>
         /// Removes choosen user by id
         /// </summary>
@@ -137,10 +139,10 @@ namespace MyFootballApi.Models
         {
             _context = new MyFootballContext();
             string query = "delete from webuser where webuser.id=" + user.id;
-            using (SqlConnection conn = _context.GetConnection())
+            using (MySqlConnection conn = _context.GetConnection())
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand(query, conn);
+                MySqlCommand cmd = new MySqlCommand(query, conn);
                 cmd.ExecuteNonQuery();
                 conn.Close();
             }
@@ -154,19 +156,120 @@ namespace MyFootballApi.Models
         public async Task<User> PutUser(int id, User user)
         {
             _context = new MyFootballContext();
+            string encPass = EncDecService.Encrypt(user.password);
             StringBuilder query = new StringBuilder();
             query.AppendFormat("Update webuser Set username = '{0}', password = '{1}', role = '{2}', email = '{3}', favouriteTeam = '{4}'"
                                + " where id = {5}",
-                              user.username, user.password, user.role, user.email, user.favouriteTeam, id);
-            using (SqlConnection conn = _context.GetConnection())
+                              user.username, encPass, user.role, user.email, user.favouriteTeam, id);
+            using (MySqlConnection conn = _context.GetConnection())
             {
                 conn.Open();
                 string q = query.ToString();
-                SqlCommand cmd = new SqlCommand(q, conn);
+                MySqlCommand cmd = new MySqlCommand(q, conn);
                 cmd.ExecuteNonQuery();
                 conn.Close();
+                user.password = encPass;
                 return user;
             }
         }
+
+        public bool doesUserExists(string username)
+        {
+            _context = new MyFootballContext();
+            StringBuilder query = new StringBuilder();
+            query.AppendFormat("select * from webuser where webuser.username='{0}'", username);
+            using (MySqlConnection conn = _context.GetConnection())
+            {
+                conn.Open();
+                string q = query.ToString();
+                MySqlCommand cmd = new MySqlCommand(q, conn);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    reader.Read();
+                    if (!reader.HasRows)
+                    {
+                        conn.Close();
+                        return false;
+                    }
+
+                    else { conn.Close(); return true; }
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Updates choosen user
+        /// </summary>
+        /// <param name="id">user id</param>
+        /// <param name="user">user update info</param>
+        /// <returns>updated user</returns>
+        public async Task<User> PutByUsername(string username, User user)
+        {
+            _context = new MyFootballContext();
+            string encPass = EncDecService.Encrypt(user.password);
+            StringBuilder query = new StringBuilder();
+            query.AppendFormat("Update webuser Set password = '{0}', email = '{1}', favouriteTeam = {2}"
+                               + " where username = '{3}'",
+                              encPass, user.email, user.favouriteTeam, username);
+            using (MySqlConnection conn = _context.GetConnection())
+            {
+                conn.Open();
+                string q = query.ToString();
+                MySqlCommand cmd = new MySqlCommand(q, conn);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+                user.password = encPass;
+                return user;
+            }
+        }
+
+        /// <summary>
+        /// returns user by given username
+        /// </summary>
+        /// <param name="username">searching user`s username</param>
+        /// <returns>user</returns>
+        public async Task<User> FindByUsername(string usern)
+        {
+            User userByUsername;
+            _context = new MyFootballContext();
+            using (MySqlConnection conn = _context.GetConnection())
+            {
+                conn.Open();
+                string query = "select * from webuser where username = '" + usern + "'";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    reader.Read();
+                    if (!reader.HasRows)
+                    {
+                        return null;
+                    }
+                    string username = reader["username"].ToString();
+                    string password = reader["password"].ToString();
+                    string role = reader["role"].ToString();
+                    string email = reader["email"].ToString();
+                    int? favouriteTeam = null;
+                    if (reader["favouriteTeam"].ToString().Length > 0)
+                    {
+                        favouriteTeam = Convert.ToInt32(reader["favouriteTeam"]);
+                    }
+                    userByUsername = new User()
+                    {
+                        id = id,
+                        username = username,
+                        password = password,
+                        role = role,
+                        email = email,
+                        favouriteTeam = favouriteTeam
+                    };
+                    reader.Close();
+                }
+                conn.Close();
+                return userByUsername;
+            }
+        }
+
     }
 }

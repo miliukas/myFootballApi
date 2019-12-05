@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace MyFootballApi.Controllers
 {
+   
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
@@ -20,6 +21,7 @@ namespace MyFootballApi.Controllers
             _authService = authService;
         }
 
+        //api/authentication
         [AllowAnonymous]
         [HttpPost]
         public IActionResult RequestToken([FromBody] TokenRequest request)
@@ -32,10 +34,10 @@ namespace MyFootballApi.Controllers
             string token;
             if (_authService.IsAuthenticated(request, out token))
             {
-                return Ok(token);
+                return Ok(new { token });
             }
 
-            return BadRequest("There is no such a user. Please check Password or Username");
+            return BadRequest( new { message = "There is no such a user. Please check Password or Username" });
         }
     }
 }

@@ -14245,9 +14245,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ernestukas\\Documents\\GitHub\\myFootballApi\\MyFootballApi\\Tests\\MyFootballApiTests.csproj",
-      "projectName": "MyFootballApiTests",
-      "projectPath": "C:\\Users\\Ernestukas\\Documents\\GitHub\\myFootballApi\\MyFootballApi\\Tests\\MyFootballApiTests.csproj",
+      "projectUniqueName": "C:\\Users\\Ernestukas\\Documents\\GitHub\\myFootballApi\\MyFootballApi\\Tests\\Tests.csproj",
+      "projectName": "Tests",
+      "projectPath": "C:\\Users\\Ernestukas\\Documents\\GitHub\\myFootballApi\\MyFootballApi\\Tests\\Tests.csproj",
       "packagesPath": "C:\\Users\\Ernestukas\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Ernestukas\\Documents\\GitHub\\myFootballApi\\MyFootballApi\\Tests\\obj\\",
       "projectStyle": "PackageReference",

@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a class="nav-brand text-white" href="/home">MyFootball</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/players">Players</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Teams</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Fixtures</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Admin panel</a>
+            </li>
+        </ul>
+    </div>
+    <button class="btn btn-primary my-2 my-sm-0" (click)="onLogin()" *ngIf="!userDetails">Sign in!</button>
+    <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()" *ngIf="userDetails">Logout!</button>      
+</nav>
+
+<router-outlet></router-outlet>
+
+<!-- Footer -->
+<footer class="page-footer font-small blue">
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2019 Copyright:
+        <a href=""> MyFootballApi.com</a>
+    </div>
+     <!-- Copyright -->
+</footer>
+<!-- Footer -->

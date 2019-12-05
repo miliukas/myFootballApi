@@ -1,0 +1,128 @@
+<h4 class="display-10">Player</h4>
+<hr>
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-10 mx-auto">
+            <form [formGroup]="service.formModel" autocomplete="off" (submit)="onSubmit(form)">
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label>First Name</label>
+                        <label class="text-danger"
+                            *ngIf="service.formModel.get('FirstName').touched && service.formModel.get('FirstName').errors?.required">*This
+                            field is required.
+                        </label>
+                        <input type="text" class="form-control" formControlName="FirstName">
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Last Name</label>
+                        <label class="text-danger"
+                            *ngIf="service.formModel.get('LastName').touched && service.formModel.get('LastName').errors?.required">*This
+                            field is required.
+                        </label>
+                        <input class="form-control" formControlName="LastName">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label>Nationality</label>
+                        <label class="text-danger"
+                            *ngIf="service.formModel.get('Nationality').touched && service.formModel.get('Nationality').errors?.required">*This
+                            field is required.
+                        </label>
+                        <input type="text" class="form-control" formControlName="Nationality">
+                    </div>
+                    <div class="col-sm-6">
+                        <label>BirthDate</label>
+                        <label class="text-danger"
+                            *ngIf="service.formModel.get('BirthDate').touched && service.formModel.get('BirthDate').errors?.required">*This
+                            field is required.
+                        </label>
+                        <input type="date" class="form-control" formControlName="BirthDate">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label>Possition</label>
+                        <label class="text-danger"
+                            *ngIf="service.formModel.get('Possition').touched && service.formModel.get('Possition').errors?.required">*This
+                            field is required.
+                        </label>
+                        <select class="form-control" formControlName="Possition">
+                            <option value="">-Select-</option>
+                            <option value="GoalKeeper">GoalKeeper</option>
+                            <option value="Centre-back defender">Centre-back defender</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Weight(kg)</label>
+                        <label class="text-danger"
+                            *ngIf="service.formModel.get('Weight').touched && service.formModel.get('Weight').errors?.required">*This
+                            field is required.
+                        </label>
+                        <input type="number" class="form-control" formControlName="Weight">
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Height(m)</label>
+                        <label class="text-danger"
+                            *ngIf="service.formModel.get('Height').touched && service.formModel.get('Height').errors?.required">*This
+                            field is required.
+                        </label>
+                        <input type="number" class="form-control" formControlName="Height">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label>League</label>
+                        <label class="text-danger"
+                            *ngIf="service.formModel.get('League').touched && service.formModel.get('League').errors?.required">*This
+                            field is required.
+                        </label>
+                        <input type="text" class="form-control" formControlName="League">
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Season</label>
+                        <label class="text-danger"
+                            *ngIf="service.formModel.get('Season').touched && service.formModel.get('Season').errors?.required">*This
+                            field is required.
+                        </label>
+                        <input type="text" class="form-control" formControlName="Season">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Team</label>
+                            <select class="form-control" formControlName="fk_TeamId">
+                                <option value="0">-Select-</option>
+                                <option *ngFor="let team of playersList" value="{{team.id}}">{{team.name}}</option>
+                                <option value="0">-Select-</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Season</label>
+                        <label class="text-danger"
+                            *ngIf="service.formModel.get('Season').touched && service.formModel.get('Season').errors?.required">*This
+                            field is required.
+                        </label>
+                        <input type="text" class="form-control" formControlName="Season">
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Season</label>
+                        <label class="text-danger"
+                            *ngIf="service.formModel.get('Season').touched && service.formModel.get('Season').errors?.required">*This
+                            field is required.
+                        </label>
+                        <input type="text" class="form-control" formControlName="Season">
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>
+                    <button type="button" class="btn btn-outlinedark ml-1" [mat-dialog-close] (click)="refresh()"><i
+                            class="fa fa-close"></i> Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

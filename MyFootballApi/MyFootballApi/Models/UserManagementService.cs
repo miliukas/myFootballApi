@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,11 +31,11 @@ namespace MyFootballApi.Models
             _context = new MyFootballContext();
             StringBuilder query = new StringBuilder();
             query.AppendFormat("select * from webuser where webuser.username = '{0}'", username);
-            using (SqlConnection conn = _context.GetConnection())
+            using (MySqlConnection conn = _context.GetConnection())
             {
                 conn.Open();
                 string q = query.ToString();
-                SqlCommand cmd = new SqlCommand(q, conn);
+                MySqlCommand cmd = new MySqlCommand(q, conn);
                 using (var reader = cmd.ExecuteReader())
                 {
                     reader.Read();

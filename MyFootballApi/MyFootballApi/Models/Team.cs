@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Text;
 
 namespace MyFootballApi.Models
@@ -29,10 +29,10 @@ namespace MyFootballApi.Models
             List<Team> list = new List<Team>();
             _context = new MyFootballContext();
 
-            using (SqlConnection conn = _context.GetConnection())
+            using (MySqlConnection conn = _context.GetConnection())
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("select * from team", conn);
+                MySqlCommand cmd = new MySqlCommand("select * from team", conn);
 
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -41,7 +41,7 @@ namespace MyFootballApi.Models
                         int id = Convert.ToInt32(reader["id"]);
                         string name = reader["name"].ToString();
                         string code = reader["code"].ToString();
-                        string logo = reader["code"].ToString();
+                        string logo = reader["logo"].ToString();
                         string country = reader["country"].ToString();
                         DateTime founded = Convert.ToDateTime(reader["founded"]);
                         string vanue_name = reader["vanue_name"].ToString();
@@ -76,11 +76,11 @@ namespace MyFootballApi.Models
         {
             Team teamById;
             _context = new MyFootballContext();
-            using (SqlConnection conn = _context.GetConnection())
+            using (MySqlConnection conn = _context.GetConnection())
             {
                 conn.Open();
                 string query = "select * from team where id = " + id.ToString();
-                SqlCommand cmd = new SqlCommand(query, conn);
+                MySqlCommand cmd = new MySqlCommand(query, conn);
                 using (var reader = cmd.ExecuteReader())
                 {
                     reader.Read();
@@ -90,9 +90,9 @@ namespace MyFootballApi.Models
                     }
                     string name = reader["name"].ToString();
                     string code = reader["code"].ToString();
-                    string logo = reader["code"].ToString();
+                    string logo = reader["logo"].ToString();
                     string country = reader["country"].ToString();
-                    DateTime founded = Convert.ToDateTime(reader["founded"]);
+                    DateTime founded = Convert.ToDateTime(reader["founded"].ToString());
                     string vanue_name = reader["vanue_name"].ToString();
                     string vanue_city = reader["vanue_city"].ToString();
                     int vanue_capacity = Convert.ToInt32(reader["vanue_capacity"]);
@@ -124,14 +124,14 @@ namespace MyFootballApi.Models
             _context = new MyFootballContext();
             StringBuilder query = new StringBuilder();
             query.AppendFormat("insert into team (name, code, logo, country, founded, vanue_name, vanue_city, vanue_capacity)"
-                               + " values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}',{7})", team.name, team.code, team.logo, team.country, team.founded, team.vanue_name,
+                               + " values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}',{7})", team.name, team.code, team.logo, team.country, team.founded.ToShortDateString(), team.vanue_name,
                                team.vanue_city, team.vanue_capacity);
 
-            using (SqlConnection conn = _context.GetConnection())
+            using (MySqlConnection conn = _context.GetConnection())
             {
                 conn.Open();
                 string q = query.ToString();
-                SqlCommand cmd = new SqlCommand(q, conn);
+                MySqlCommand cmd = new MySqlCommand(q, conn);
                 cmd.ExecuteNonQuery();
                 conn.Close();
                 return team;
@@ -145,10 +145,10 @@ namespace MyFootballApi.Models
         {
             _context = new MyFootballContext();
             string query = "delete from team where team.id=" + team.id;
-            using (SqlConnection conn = _context.GetConnection())
+            using (MySqlConnection conn = _context.GetConnection())
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand(query, conn);
+                MySqlCommand cmd = new MySqlCommand(query, conn);
                 cmd.ExecuteNonQuery();
                 conn.Close();
             }
@@ -165,14 +165,14 @@ namespace MyFootballApi.Models
             StringBuilder query = new StringBuilder();
             query.AppendFormat("Update team Set name = '{0}', code = '{1}', logo = '{2}', country = '{3}', founded = '{4}', vanue_name = '{5}', "
                              + "vanue_city = '{6}', vanue_capacity = {7} where id = {8}",
-                            team.name, team.code, team.logo, team.country, team.founded, team.vanue_name,
+                            team.name, team.code, team.logo, team.country, team.founded.ToShortDateString(), team.vanue_name,
                             team.vanue_city, team.vanue_capacity, id);
 
-            using (SqlConnection conn = _context.GetConnection())
+            using (MySqlConnection conn = _context.GetConnection())
             {
                 conn.Open();
                 string q = query.ToString();
-                SqlCommand cmd = new SqlCommand(q, conn);
+                MySqlCommand cmd = new MySqlCommand(q, conn);
                 cmd.ExecuteNonQuery();
                 conn.Close();
                 return team;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Text;
 
 
@@ -29,10 +29,10 @@ namespace MyFootballApi.Models
             List<Game> list = new List<Game>();
             _context = new MyFootballContext();
 
-            using (SqlConnection conn = _context.GetConnection())
+            using (MySqlConnection conn = _context.GetConnection())
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("select * from game", conn);
+                MySqlCommand cmd = new MySqlCommand("select * from game", conn);
 
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -74,11 +74,11 @@ namespace MyFootballApi.Models
         {
             Game gameById;
             _context = new MyFootballContext();
-            using (SqlConnection conn = _context.GetConnection())
+            using (MySqlConnection conn = _context.GetConnection())
             {
                 conn.Open();
                 string query = "select * from game where id = " + id.ToString();
-                SqlCommand cmd = new SqlCommand(query, conn);
+                MySqlCommand cmd = new MySqlCommand(query, conn);
                 using (var reader = cmd.ExecuteReader())
                 {
                     reader.Read();
@@ -111,24 +111,26 @@ namespace MyFootballApi.Models
             }
         }
 
+
         /// <summary>
         /// Adds new game in data base
         /// </summary>
         /// <param name="game">given game to be added to database</param>
         /// <returns>game</returns>
         public async Task<Game> Add(Game game)
+
         {
             _context = new MyFootballContext();
             StringBuilder query = new StringBuilder();
             query.AppendFormat("insert into game (eventDate, goalsHomeTeam, goalsAwayTeam, venue, elapsed, fk_Teamid, fk_Teamid1)"
-                               + " values ('{0}',{1},{2},'{3}',{4},{5},{6})", game.eventDate, game.goalsHomeTeam, game.goalsAwayTeam, game.venue,
+                               + " values ('{0}',{1},{2},'{3}',{4},{5},{6})", game.eventDate.ToString(), game.goalsHomeTeam, game.goalsAwayTeam, game.venue,
                                game.elapsed, game.fk_Teamid, game.fk_Teamid1);
 
-            using (SqlConnection conn = _context.GetConnection())
+            using (MySqlConnection conn = _context.GetConnection())
             {
                 conn.Open();
                 string q = query.ToString();
-                SqlCommand cmd = new SqlCommand(q, conn);
+                MySqlCommand cmd = new MySqlCommand(q, conn);
                 cmd.ExecuteNonQuery();
                 conn.Close();
                 return game;
@@ -142,10 +144,10 @@ namespace MyFootballApi.Models
         {
             _context = new MyFootballContext();
             string query = "delete from game where game.id=" + game.id;
-            using (SqlConnection conn = _context.GetConnection())
+            using (MySqlConnection conn = _context.GetConnection())
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand(query, conn);
+                MySqlCommand cmd = new MySqlCommand(query, conn);
                 cmd.ExecuteNonQuery();
                 conn.Close();
             }
@@ -157,13 +159,13 @@ namespace MyFootballApi.Models
             StringBuilder query = new StringBuilder();
             query.AppendFormat("Update game Set eventDate = '{0}', goalsHomeTeam = {1}, goalsAwayTeam = {2}, venue = '{3}', elapsed = {4}, "
                              + "fk_Teamid = {5}, fk_Teamid1 = {6} where id = {7}",
-                             game.eventDate, game.goalsHomeTeam, game.goalsAwayTeam, game.venue, game.elapsed, game.fk_Teamid, game.fk_Teamid1, id);
+                             game.eventDate.ToString(), game.goalsHomeTeam, game.goalsAwayTeam, game.venue, game.elapsed, game.fk_Teamid, game.fk_Teamid1, id);
 
-            using (SqlConnection conn = _context.GetConnection())
+            using (MySqlConnection conn = _context.GetConnection())
             {
                 conn.Open();
                 string q = query.ToString();
-                SqlCommand cmd = new SqlCommand(q, conn);
+                MySqlCommand cmd = new MySqlCommand(q, conn);
                 cmd.ExecuteNonQuery();
                 conn.Close();
                 return game;

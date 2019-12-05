@@ -66,9 +66,7 @@ namespace MyFootballApi.Controllers
             {
                 return NotFound();
             }
-
             _context.user.PutUser(id, user);
-
             return Ok(user);
         }
 
@@ -77,15 +75,23 @@ namespace MyFootballApi.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> PostUser([FromBody] User user)
         {
+            Response response = new Response();
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
+            if (_context.user.doesUserExists(user.username))
+            {
+                //formates dublicate user name error
+                response.DublicateUserName(user.username);
+                return Ok(response);
+            }
+
             //await
             _context.user.Add(user);
-
-            return CreatedAtAction("GetUser", new { id = user.id }, user);
+            response.NoErrors();
+            return Ok(response);
         }
 
         // DELETE: api/Users/5

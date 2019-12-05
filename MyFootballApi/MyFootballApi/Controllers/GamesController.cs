@@ -78,13 +78,12 @@ namespace MyFootballApi.Controllers
         [HttpPost]
         [Authorize(Roles = "administrator")]
         public async Task<IActionResult> PostGame([FromBody] Game game)
+
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            //await
             _context.game.Add(game);
 
             return CreatedAtAction("GetGame", new { id = game.id }, game);

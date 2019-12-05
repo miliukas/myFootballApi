@@ -1,0 +1,30 @@
+•src
++---•app
+|   +--•user
+|   |  |--user.component.ts|.html
+|   |  +--•registration
+|   |  |  |registration.component.ts|.html
+|   |  +--•login
+|   |  |  |login.component.ts|.html
+|   |   
+|   +--•players
+|   |  |--players.component.ts|.html
+|   |  +--•player
+|   |  |  |player.component.ts|.html
+|   |   
+|   +--•home
+|   |  |--home.component.ts|.html
+|   |
+|   +--•shared
+|   |  |--user.service.ts
+|   |  |--player.service.ts
+|   |  |--player.model.ts
+|   |
+|   +--•auth
+|   |  |--auth.guard.ts
+|   |  |--auth.interceptor.ts
+|   |
+|   |--app.module.ts
+|   |--app.routing.module.ts (route confings.)
+|
+|--index.html (cdn path for bootstrap).   
