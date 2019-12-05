@@ -1,2 +1,2 @@
 # myFootballApi
-Saitynu laboras
+Saitynu laboratorinis REST API + ANGULAR 7
