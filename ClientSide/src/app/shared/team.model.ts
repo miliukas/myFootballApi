@@ -4,7 +4,7 @@ export class Team {
     code : string;
     logo : string;
     country : string;
-    founded : Date;
+    founded : string;
     vanue_name : string;
     vanue_city : string;
     vanue_capacity : number;

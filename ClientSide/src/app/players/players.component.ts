@@ -12,7 +12,7 @@ import { Player } from '../shared/player.model';
 })
 export class PlayersComponent implements OnInit {
 
-  playersList : Player[];
+  playersList : Player[] = [];
   
   constructor(private dialog : MatDialog, private service : PlayersService) { }
 

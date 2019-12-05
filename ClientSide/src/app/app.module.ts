@@ -20,6 +20,8 @@ import { PlayersComponent } from './players/players.component';
 import { PlayerComponent } from './players/player/player.component';
 import { PlayerService } from './shared/player.service';
 import { PlayersService } from './shared/players.service';
+import { TeamsComponent } from './teams/teams.component';
+import { TeamComponent } from './teams/team/team.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { PlayersService } from './shared/players.service';
     LoginComponent,
     HomeComponent,
     PlayersComponent,
-    PlayerComponent
+    PlayerComponent,
+    TeamsComponent,
+    TeamComponent
   ],
   imports: [
     BrowserModule,

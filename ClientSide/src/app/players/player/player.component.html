@@ -94,7 +94,7 @@
                             <label>Team</label>
                             <select class="form-control" formControlName="fk_TeamId">
                                 <option value="0">-Select-</option>
-                                <option *ngFor="let team of playersList" value="{{team.id}}">{{team.name}}</option>
+                                <option *ngFor="let team of teamList" value="{{team.id}}">{{team.name}}</option>
                                 <option value="0">-Select-</option>
                             </select>
                         </div>
@@ -120,7 +120,7 @@
                 <div class="form-group">
                     <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>
                     <button type="button" class="btn btn-outlinedark ml-1" [mat-dialog-close] (click)="refresh()"><i
-                            class="fa fa-close"></i> Close</button>
+                        class="fa fa-close"></i> Close</button>
                 </div>
             </form>
         </div>

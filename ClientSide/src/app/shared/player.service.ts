@@ -8,27 +8,28 @@ import { FormBuilder, Validators } from '@angular/forms';
   providedIn: 'root'
 })
 export class PlayerService {
+
   formData : Player;
 
   constructor(private fb: FormBuilder, private http:HttpClient) { }
-  
-  formModel = this.fb.group({
-    Id : [''],
-    FirstName :['', [Validators.required, Validators.minLength(5), Validators.maxLength(40)]],
-    LastName :['', [Validators.required, Validators.minLength(3)]],
-    BirthDate :['', Validators.required],
-    Age :['', Validators.required],
-    Possition :['', Validators.required],
-    Nationality :['', Validators.required],
-    Weight :['', Validators.required],
-    Height :['', Validators.required],
-    Goals :['', Validators.required],
-    Inured :['', Validators.required],
-    League :['', Validators.required],
-    fk_TeamId :['', Validators.required]
+
+    formModel = this.fb.group({
+      Id : [''],
+      FirstName : ['', [Validators.required, Validators.minLength(5), Validators.maxLength(40)]],
+      LastName : ['', [Validators.required, Validators.minLength(3)]],
+      BirthDate :['', Validators.required],
+      Age : ['', Validators.required],
+      Possition : ['', Validators.required],
+      Nationality : ['', Validators.required],
+      Weight : ['', Validators.required],
+      Height : ['', Validators.required],
+      Goals : ['', Validators.required],
+      Inured : ['', Validators.required],
+      League : ['', Validators.required],
+      fk_TeamId : ['', Validators.required]
   });
 
-  addNewPlayer()
+  /*addNewPlayer()
   {
     var body ={
       Id : '',
@@ -46,16 +47,10 @@ export class PlayerService {
       fk_TeamId : this.formModel.value.fk_TeamId
     };
     return this.http.post(environment.apiURL + 'Players', body);
-  }
+  }*/
 
   getTeamList()
   {
-    console.log(this.http.get(environment.apiURL + 'Teams').toPromise());
     return this.http.get(environment.apiURL + 'Teams').toPromise();
-  }
-
-  getPlayersList()
-  {
-    return this.http.get(environment.apiURL + 'Players').toPromise();
   }
 }

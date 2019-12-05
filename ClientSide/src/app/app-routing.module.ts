@@ -7,6 +7,8 @@ import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth/auth.guard';
 import { PlayersComponent } from './players/players.component';
 import { PlayerComponent } from './players/player/player.component';
+import { TeamsComponent } from './teams/teams.component';
+import { TeamComponent } from './teams/team/team.component';
 
 
 const routes: Routes = [
@@ -18,14 +20,25 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent} /*user/login*/
     ]
   },
+
   {path:'players', component:PlayersComponent},
   {
-    path:'player', component:PlayersComponent,
+    path:'players', component:PlayersComponent,
     children:[
       {path:'', component:PlayerComponent},
       {path:'edit/:id', component:PlayerComponent}
     ]
   },
+
+  {path:'teams', component:TeamsComponent},
+  {
+    path:'teams', component:TeamsComponent,
+    children:[
+      {path:'', component:TeamComponent},
+      {path:'edit/:id', component:TeamComponent}
+    ]
+  },
+
   {path:'home', component: HomeComponent} //, canActivate:[AuthGuard]
 ];
 

@@ -15,24 +15,18 @@ import { environment } from 'src/environments/environment';
 })
 export class PlayerComponent implements OnInit {
   formData : Player;
-  playersList : Player[];
-  teamList : Team[];
+  teamList : Team[] = [];
 
   constructor(private http:HttpClient, public service : PlayerService, @Inject(MAT_DIALOG_DATA) public data, public dialogRef : MatDialogRef<PlayerComponent>,
   private toastr: ToastrService) { }
 
   ngOnInit() {
-    console.log("afsasf");
-    this.getTeamList().then(
+    //this.service.formModel.reset();
+    this.service.getTeamList().then(
       res => this.teamList = res as Team[]
     );
-    console.log(this.teamList.length.toString());
-    console.log("afsasf");
-    this.service.getPlayersList().then(
-      res => this.playersList = res as Player[]
-    );
 
-    this.formData = {
+    /*this.formData = {
       id : this.data.id,
       first_name : '',
       last_name : '',
@@ -47,7 +41,7 @@ export class PlayerComponent implements OnInit {
       league : '',
       season : '',
       fk_TeamId : 0
-    }
+    }*/
   }
 
   onSubmit(form:NgForm)
@@ -59,11 +53,4 @@ export class PlayerComponent implements OnInit {
   {
     this.service.formModel.reset();
   }
-
-  getTeamList()
-  {
-    console.log(this.http.get(environment.apiURL + 'Teams').toPromise());
-    return this.http.get(environment.apiURL + 'Teams').toPromise();
-  }
-
 }
