@@ -1,0 +1,77 @@
+<h4 class="display-10">Player details</h4>
+<hr>
+<div *ngIf="!authService.isUser">
+        <p>Only registred users can see this. Click here <a href="/user/registration"> to register! </a><p>
+        <div class="form-group">
+            <button type="button" class="btn btn-outlinedark" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
+        </div>        
+</div>
+<div class="container py-5" *ngIf="authService.isUser">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <table class="table table-bordered table-dark">
+                <tbody>
+
+                    <tr>
+                    <th>First name:</th>
+                        <td>{{this.formData.first_name}}</td>
+                    </tr>
+
+                    <tr>
+                    <th>Last name:</th>
+                        <td>{{this.formData.last_name}}</td>
+                    </tr>
+
+                    <tr>
+                    <th>Nationality:</th>
+                        <td>{{this.formData.nationality}}</td>
+                    </tr>
+
+                    <tr>
+                    <th>Birth date:</th>
+                        <td>{{this.formData.birth_date}}</td>
+                    </tr>
+
+                    <tr>
+                    <th>Age:</th>
+                        <td>{{this.formData.age}}</td>
+                    </tr>
+
+                    <tr>
+                    <th>Possition:</th>
+                        <td>{{this.formData.possition}}</td>
+                    </tr>
+
+                    <tr>
+                    <th>Weight:</th>
+                        <td>{{this.formData.weight}} kg</td>
+                    </tr>
+
+                    <tr>
+                    <th>Height:</th>
+                        <td>{{this.formData.height}} m</td>
+                    </tr>
+                    <tr>
+                    <th>Goals:</th>
+                        <td>{{this.formData.goals}}</td>
+                    </tr>
+
+                    <tr>
+                    <th>Injured:</th>
+                    <td>{{isInjured()}}</td>
+                    </tr> 
+                    
+                    <tr>
+                        <th>Team:</th>
+                        <td>{{this.team.name}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <hr>
+            <div class="form-group">
+                <button type="button" class="btn btn-outlinedark" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
+            </div>
+        </div>
+    </div>
+</div>

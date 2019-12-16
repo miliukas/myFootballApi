@@ -3,7 +3,7 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
     </button>
-
+    
     <!-- Navbar links -->
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
@@ -14,10 +14,10 @@
                 <a class="nav-link" href="/teams">Teams</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Fixtures</a>
+                <a class="nav-link" href="/games">Fixtures</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Admin panel</a>
+            <li class="nav-item" *ngIf="isAdmin">
+                <a class="nav-link" href="/adminpanel">Admin panel</a>
             </li>
         </ul>
     </div>

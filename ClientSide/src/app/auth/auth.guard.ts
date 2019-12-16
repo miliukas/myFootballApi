@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  isAdmin = this.checkIsAdmin(); 
+  isAdmin = this.checkIsAdmin();
+  isUser = this.checkIsUser(); 
   /**
    *
    */
@@ -16,11 +17,11 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
-      if(localStorage.getItem('token') != null)
+      if(this.checkIsAdmin())
     return true;
     else 
     {
-      this.router.navigate(['/user/login']);
+      this.router.navigate(['/home']);
       return false;
     }
   }
@@ -47,16 +48,20 @@ checkIsAdmin()
   var decodedToken = this.decodeToken(localStorage.getItem('token'));
   var role = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
   var a = false;
-  console.log(role);
   if(role == "administrator"){
     a = true;
-    console.log(a);
     return true;
   }
   else{
-    console.log(a);
     return false;
   }
+}
+
+checkIsUser()
+{
+  if(localStorage.getItem('token') == null)
+    return false;
+  return true;
 }
   
 }

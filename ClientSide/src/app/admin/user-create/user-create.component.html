@@ -1,0 +1,54 @@
+<h4 class="display-10">Form of new user</h4>
+<hr>
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-10 mx-auto">
+            <form #form="ngForm" autocomplete="off" (submit)="onSubmit()">
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label>Username</label>
+                        <input name="username" #username="ngModel" [(ngModel)]="formData.username" type="text" class="form-control">
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Email</label>
+                        <input name="email" #email="ngModel" [(ngModel)]="formData.email" type="email" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label>Password</label>
+                        <input name="password" #password="ngModel" [(ngModel)]="formData.password" type="password" class="form-control">
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Confirm password</label>
+                        <input name="conPassword"  [(ngModel)]="conPassword" type="password" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label>Favourite Team</label>
+                        <select name="favouriteTeam" #favouriteTeam="ngModel" [(ngModel)]="formData.favouriteTeam" class="form-control">
+                            <option value="0">--Select favourite team--</option>
+                            <option *ngFor="let team of teamList" value="{{team.id}}">{{team.name}}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Role</label>
+                        <select name="role" #role="ngModel" [(ngModel)]="formData.role" class="form-control">
+                            <option value="">--Select user`s role--</option>
+                            <option value="User">User</option>
+                            <option value="administrator">Administrator</option>
+                        </select>
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>
+                    <button type="button" class="btn btn-outlinedark ml-1" [mat-dialog-close]><i
+                        class="fa fa-close"></i> Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

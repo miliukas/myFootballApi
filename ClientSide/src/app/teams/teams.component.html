@@ -6,14 +6,15 @@
             <th>Code</th>
             <th>Country</th> 
             <th>Founded</th>
+            <th>Actions</th>
             <th>
-                <a class="btn btn-sm btn-success text-white" (click)="AddOrEditTeam(null)" [hidden]="!authService.isAdmin"><i class="fa fa-plus"></i> Add team</a>
+                <a class="btn btn-sm btn-success text-white" (click)="AddTeam()" [hidden]="!authService.isAdmin"><i class="fa fa-plus"></i> Add team</a>
             </th>
         </thead>
         <tbody>
             <tr *ngIf="teamsList.length == 0">
                 <td class="font-italic text-center" colspan="6">
-                There are not any teams.
+                Loading...
                 </td>
             </tr>
             <tr *ngFor="let team of teamsList; let i = index">
@@ -23,9 +24,9 @@
                 <td>{{team.country}}</td>
                 <td>{{team.founded.split('T')[0]}}</td>
                 <td>
-                    <a class="btn btn-sm btn-primary text-white" ><i class="fa fa-info"></i></a>
-                    <a class="btn btn-sm btn-info text-white ml-1" ><i class="fa fa-pencil"></i></a>
-                    <a class="btn btn-sm btn-danger text-white ml-1"><i class="fa fa-trash"></i></a>
+                    <a class="btn btn-sm btn-primary text-white" (click)="DetailsTeam(team)"><i class="fa fa-info"></i></a>
+                    <a class="btn btn-sm btn-info text-white ml-1" [hidden]="!authService.isAdmin" (click)="EditTeam(team)"><i class="fa fa-pencil"></i></a>
+                    <a class="btn btn-sm btn-danger text-white ml-1" [hidden]="!authService.isAdmin" (click)="onTeamDelete(team.id)"><i class="fa fa-trash"></i></a>
                 </td>
             </tr>
         </tbody>

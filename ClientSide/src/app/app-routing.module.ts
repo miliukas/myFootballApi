@@ -9,6 +9,18 @@ import { PlayersComponent } from './players/players.component';
 import { PlayerComponent } from './players/player/player.component';
 import { TeamsComponent } from './teams/teams.component';
 import { TeamComponent } from './teams/team/team.component';
+import { TeamEditComponent } from './teams/team-edit/team-edit.component';
+import { TeamDetailsComponent } from './teams/team-details/team-details.component';
+import { GamesComponent } from './games/games.component';
+import { GameCreateComponent } from './games/game-create/game-create.component';
+import { GameEditComponent } from './games/game-edit/game-edit.component';
+import { GameDetailsComponent } from './games/game-details/game-details.component';
+import { AdminComponent } from './admin/admin.component';
+import { UserCreateComponent } from './admin/user-create/user-create.component';
+import { UserDetailsComponent } from './admin/user-details/user-details.component';
+import { UserEditComponent } from './admin/user-edit/user-edit.component';
+import { PlayerEditComponent } from './players/player-edit/player-edit.component';
+import { PlayerDetailsComponent } from './players/player-details/player-details.component';
 
 
 const routes: Routes = [
@@ -23,19 +35,37 @@ const routes: Routes = [
 
   {path:'players', component:PlayersComponent},
   {
-    path:'players', component:PlayersComponent,
-    children:[
+    path:'player', children:[
       {path:'', component:PlayerComponent},
-      {path:'edit/:id', component:PlayerComponent}
+      {path:'edit/:id', component:PlayerEditComponent},
+      {path:'details/:id', component:PlayerDetailsComponent}
     ]
   },
 
   {path:'teams', component:TeamsComponent},
   {
-    path:'teams', component:TeamsComponent,
-    children:[
+    path:'team',children:[
       {path:'', component:TeamComponent},
-      {path:'edit/:id', component:TeamComponent}
+      {path:'edit/:id', component:TeamEditComponent},
+      {path:'details/:id', component:TeamDetailsComponent}
+    ]
+  },
+
+  {path:'games', component : GamesComponent},
+  {
+    path:'game',children:[
+      {path:'', component:GameCreateComponent},
+      {path:'edit/:id', component:GameEditComponent},
+      {path:'details/:id', component:GameDetailsComponent}
+    ]
+  },
+
+  {path:'adminpanel', component : AdminComponent, canActivate:[AuthGuard]},
+  {
+    path:'user',children:[
+      {path:'', component:UserCreateComponent, canActivate:[AuthGuard]},
+      {path:'edit/:id', component:UserEditComponent , canActivate:[AuthGuard]},
+      {path:'details/:id', component: UserDetailsComponent, canActivate:[AuthGuard]}
     ]
   },
 

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, NgForm } from '@angular/forms';
+import { Team } from './team.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,12 +34,17 @@ export class TeamService {
       vanue_city: this.formModel.value.VanueCity,
       vanue_capacity: this.formModel.value.VanueCapacity
     };
-    console.log(JSON.stringify(body));
+    //console.log(JSON.stringify(body));
     return this.http.post(environment.apiURL + 'Teams', body);
   }
 
-  getTeamsList()
+  getTeamById(id:number)
   {
-    return this.http.get(environment.apiURL + 'Teams').toPromise();
+    return this.http.get(environment.apiURL + 'Teams/'+id).toPromise();
+  }
+
+  editTeam(formData : Team)
+  {
+      return this.http.put(environment.apiURL + 'Teams/'+formData.id, formData);
   }
 }

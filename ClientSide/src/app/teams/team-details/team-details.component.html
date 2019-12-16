@@ -1,0 +1,53 @@
+<h4 class="display-10">Team details</h4>
+<hr>
+<div *ngIf="!authService.isUser">
+        <p>Only registred users can see this. Click here <a href="/user/registration"> to register! </a><p>
+        <div class="form-group">
+            <button type="button" class="btn btn-outlinedark" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
+        </div>        
+</div>
+<div class="container py-5" *ngIf="authService.isUser">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <table class="table table-bordered table-dark">
+                <tbody>
+                    <tr>
+                    <th>Team name:</th>
+                        <td>{{this.formData.name}}</td>
+                    </tr>
+                    <tr>
+                    <th>Team code:</th>
+                        <td>{{this.formData.code}}</td>
+                    </tr>
+                    <tr>
+                    <th>Country:</th>
+                        <td>{{this.formData.country}}</td>
+                    </tr>
+                    <tr>
+                    <th>Founded:</th>
+                        <td>{{this.formData.founded}}</td>
+                    </tr>
+                    <tr>
+                    <th>Vanue name:</th>
+                        <td>{{this.formData.vanue_name}}</td>
+                    </tr>
+                    <tr>
+                    <th>Vanue city:</th>
+                        <td>{{this.formData.vanue_city}}</td>
+                    </tr>
+                    <tr>
+                    <th>Vanue capacity:</th>
+                        <td>{{this.formData.vanue_capacity}}</td>
+                    </tr>      
+                </tbody>
+            </table>
+            <hr>
+            <div class="form-group">
+                <button type="button" class="btn btn-outlinedark" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
+            </div>
+        </div>
+    </div>
+
+    
+
+</div>

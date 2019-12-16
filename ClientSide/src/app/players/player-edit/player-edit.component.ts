@@ -1,42 +1,45 @@
-import { Component, OnInit} from '@angular/core';
-import { Player } from 'src/app/shared/player.model';
-import { ToastrService } from 'ngx-toastr';
-import { Team } from 'src/app/shared/team.model';
-import { TeamsService } from 'src/app/shared/teams.service';
+import { Component, OnInit, Inject } from '@angular/core';
+import { PlayerComponent } from '../player/player.component';
 import { PlayerService } from 'src/app/shared/player.service';
+import { ToastrService } from 'ngx-toastr';
+import { TeamsService } from 'src/app/shared/teams.service';
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { Player } from 'src/app/shared/player.model';
+import { Team } from 'src/app/shared/team.model';
 
 @Component({
-  selector: 'app-player',
-  templateUrl: './player.component.html',
+  selector: 'app-player-edit',
+  templateUrl: './player-edit.component.html',
   styles: []
 })
-export class PlayerComponent implements OnInit {
-  formData : Player = new Player();
+export class PlayerEditComponent implements OnInit {
+
+  formData : Player;
   teamList : Team[] = [];
-  isValid : boolean = false;
+  isValid: boolean = false;
 
-  constructor(private teamsService : TeamsService, private toastr: ToastrService,
-      private service : PlayerService) { }
+  constructor( @Inject(MAT_DIALOG_DATA) public data, public dialogRef:MatDialogRef<PlayerComponent>,
+    private service:PlayerService, private toastr:ToastrService, private teamsService : TeamsService) { }
 
-  ngOnInit() 
+  ngOnInit()
   {
-    //this.service.formModel.reset();
     this.teamsService.getTeamsList().then(res => this.teamList = res as Team[]);
+    var substring = this.data.player.birth_date.split('T')[0];
     this.formData = {
-      id : 0,
-      first_name : "",
-      last_name : "",
-      birth_date : "",
+      id : this.data.player.id,
+      first_name : this.data.player.first_name,
+      last_name : this.data.player.last_name,
+      birth_date : substring,
       age : 0,
-      possition : "",
-      nationality : "",
-      weight : 0,
-      height : 0,
-      goals : 0,
-      injured : -1, 
-      league : "",
-      season : "",
-      fk_TeamId : 0
+      possition : this.data.player.possition,
+      nationality : this.data.player.nationality,
+      weight : this.data.player.weight,
+      height : this.data.player.height,
+      goals : this.data.player.goals,
+      injured : this.data.player.injured, 
+      league : this.data.player.league,
+      season : this.data.player.season,
+      fk_TeamId : this.data.player.fk_TeamId
     }
   }
 
@@ -59,12 +62,11 @@ export class PlayerComponent implements OnInit {
       var date = new Date();
       var year = date.getFullYear();
       this.formData.age = year - birthYears;
-      this.service.addNewPlayer(this.formData).subscribe(
+      this.service.editPlayer(this.formData).subscribe(
         (res:any) => {
           if(res.succeeded)
           {
-              this.resetForm();
-              this.toastr.success('New player created!!', 'Creation successful.');
+              this.toastr.success('Player was edited!!', 'Edition successful.');
           }
           else {
             res.errors.forEach(element => {
@@ -87,26 +89,6 @@ export class PlayerComponent implements OnInit {
     else
     {
       this.toastr.error('The form was incorect!', 'Please check inputs.');
-    }
-  }
-
-  resetForm()
-  {
-    this.formData = {
-      id : 0,
-      first_name : "",
-      last_name : "",
-      birth_date : "",
-      age : 0,
-      possition : "",
-      nationality : "",
-      weight : 0,
-      height : 0,
-      goals : 0,
-      injured : -1, 
-      league : "",
-      season : "",
-      fk_TeamId : 0
     }
   }
 

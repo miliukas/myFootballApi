@@ -1,0 +1,46 @@
+<h4 class="display-10">Match details</h4>
+<hr>
+<div *ngIf="!authService.isUser">
+        <p>Only registred users can see this. Click here <a href="/user/registration"> to register! </a><p>
+        <div class="form-group">
+            <button type="button" class="btn btn-outlinedark" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
+        </div>        
+</div>
+<div class="container py-5" *ngIf="authService.isUser">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <table class="table table-bordered table-dark">
+                <tbody>
+                    <tr>
+                    <th>Home Team:</th>
+                        <td>{{this.homeTeam.name}}</td>
+                    </tr>
+                    <tr>
+                    <th>Away Team:</th>
+                        <td>{{this.awayTeam.name}}</td>
+                    </tr>
+                    <tr>
+                    <th>Venue:</th>
+                        <td>{{this.formData.venue}}</td>
+                    </tr>
+                    <tr>
+                    <th>Event date:</th>
+                        <td>{{this.formData.eventDate}}</td>
+                    </tr>
+                    <tr>
+                    <th>Home Team Goals:</th>
+                        <td>{{this.formData.goalsHomeTeam}}</td>
+                    </tr>
+                    <tr>
+                    <th>Away Team Goals:</th>
+                        <td>{{this.formData.goalsAwayTeam}}</td>
+                    </tr>      
+                </tbody>
+            </table>
+            <hr>
+            <div class="form-group">
+                <button type="button" class="btn btn-outlinedark" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
+            </div>
+        </div>
+    </div>
+</div>

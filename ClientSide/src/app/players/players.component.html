@@ -6,14 +6,15 @@
             <th>Last Name</th>
             <th>League</th> 
             <th>Season</th>
+            <th>Actions</th>
             <th>
-                <a class="btn btn-sm btn-success text-white" (click)="AddOrEditPlayer(null)"><i class="fa fa-plus"></i> Add player</a>
+                <a class="btn btn-sm btn-success text-white" (click)="addPlayer()" [hidden]="!authService.isAdmin"><i class="fa fa-plus"></i> Add player</a>
             </th>
         </thead>
         <tbody>
             <tr *ngIf="playersList.length==0">
                 <td class="font-italic text-center" colspan="6">
-                There are not any players.
+                Loading...
                 </td>
             </tr>
             <tr *ngFor="let player of playersList; let i = index">
@@ -23,9 +24,9 @@
                 <td>{{player.league}}</td>
                 <td>{{player.season}}</td>
                 <td>
-                    <a class="btn btn-sm btn-primary text-white" (click)="AddOrEditPlayer(player.id)"><i class="fa fa-info"></i></a>
-                    <a class="btn btn-sm btn-info text-white ml-1" (click)="AddOrEditPlayer(player.id)"><i class="fa fa-pencil"></i></a>
-                    <a class="btn btn-sm btn-danger text-white ml-1" (click)="AddOrEditPlayer(player.id)"><i class="fa fa-trash"></i></a>
+                    <a class="btn btn-sm btn-primary text-white" (click)="detailsPlayer(player)"><i class="fa fa-info"></i></a>
+                    <a class="btn btn-sm btn-info text-white ml-1" (click)="editPlayer(player)" [hidden]="!authService.isAdmin"><i class="fa fa-pencil"></i></a>
+                    <a class="btn btn-sm btn-danger text-white ml-1" (click)="onPlayerDelete(player.id)" [hidden]="!authService.isAdmin"><i class="fa fa-trash"></i></a>
                 </td>
             </tr>
         </tbody>

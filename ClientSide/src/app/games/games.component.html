@@ -1,0 +1,35 @@
+<div class="col-md-8 offset-md-2 mt-4">
+    <table class="table table-dark">
+        <thead class="thead-light">
+            <th>No.</th> 
+            <th>Date</th> 
+            <th>Home Team</th>
+            <th>Result</th> 
+            <th>Away Team</th>
+            <th>Actions</th>
+            <th>
+                <a class="btn btn-sm btn-success text-white" (click)="AddGames()" [hidden]="!authService.isAdmin"><i class="fa fa-plus"></i> Add match</a>
+            </th>
+        </thead>
+        <tbody>
+            <tr *ngIf="gamesList.length == 0">
+                <td class="font-italic text-center" colspan="6">
+                Loading...
+                </td>
+            </tr>
+            <tr *ngFor="let game of gamesList; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{game.eventDate.split('T')[0]}}</td>
+                <td>{{getTeamNameById(game.fk_Teamid)}}</td>
+                <td>{{game.goalsHomeTeam}}-{{game.goalsAwayTeam}}</td>
+                <td>{{getTeamNameById(game.fk_Teamid1)}}</td>
+                <td>
+                    <a class="btn btn-sm btn-primary text-white" (click)="DetailsGames(game)"><i class="fa fa-info"></i></a>
+                    <a class="btn btn-sm btn-info text-white ml-1" [hidden]="!authService.isAdmin" (click)="EditGames(game)"><i class="fa fa-pencil"></i></a>
+                    <a class="btn btn-sm btn-danger text-white ml-1" [hidden]="!authService.isAdmin" (click)="onGamesDelete(game.id)"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { TeamService } from 'src/app/shared/team.service';
 import { ToastrService } from 'ngx-toastr';
+import { Team } from 'src/app/shared/team.model';
 
 @Component({
   selector: 'app-team',
@@ -8,11 +9,11 @@ import { ToastrService } from 'ngx-toastr';
   styles: []
 })
 export class TeamComponent implements OnInit {
-
-  constructor(private service : TeamService, private toastr:ToastrService) { }
-
+  team : Team; 
+  constructor(private service : TeamService, private toastr:ToastrService) {
+  }
+  
   ngOnInit() {
-    this.service.formModel.reset();
   }
 
   onSubmit()
@@ -21,8 +22,8 @@ export class TeamComponent implements OnInit {
       (res:any) => {
         if(res.succeeded)
         {
-          this.service.formModel.reset();
-          this.toastr.success('New team created!', 'Creation successful.');
+            this.service.formModel.reset();
+            this.toastr.success('New team created!', 'Creation successful.');
         }
         else {
           res.errors.forEach(element => {

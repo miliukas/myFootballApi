@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from './shared/user.service';
+import { AuthGuard } from './auth/auth.guard';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +9,15 @@ import { UserService } from './shared/user.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
-  title = 'ClientSide';
+  isAdmin : boolean = false;
+  title = 'MyFootball';
   userDetails;
 
-  constructor(private router: Router, private service : UserService) { }
+  constructor(private router: Router, private service : UserService, private authService: AuthGuard) { }
 
   ngOnInit() {
+    this.isAdmin = this.authService.isAdmin;
+    console.log(this.isAdmin);
     this.service.getUserProfile().subscribe(
       res => {
         this.userDetails = res;
@@ -27,8 +30,8 @@ export class AppComponent implements OnInit {
   onLogout()
   {
     localStorage.removeItem('token');
-    this.router.navigate(['']);
     this.userDetails = null;
+    window.location.reload();
   }
 
   onLogin()
